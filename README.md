@@ -4,9 +4,7 @@ A set of smart contracts and a decentralised app that incentivise people who wan
 
 ## Requirements
 
-This guide require macOS v10.12, Xcode and Node v7 ()which is not possible to install with `brew` anymore). Get the Node
-installation package from [previous releases on nodejs.org](https://nodejs.org/en/download/releases/). Node v8 have not
-been successfully tested yet.
+This setup requires macOS v10.12 and NodeJS (v7 or v8).
 
 ## Simple installation
 
