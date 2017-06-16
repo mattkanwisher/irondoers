@@ -95,6 +95,9 @@ $ rm -rf ./chain/*
 
 ## Testing
 
+Note that if you want to run automated tests on `geth`, then you must manually create and manage all test accounts.
+If you use `testrpc` this is done for you.
+
 Compile and migrate all contracts to the blockchain you started during the installation:
 
 ```bash
