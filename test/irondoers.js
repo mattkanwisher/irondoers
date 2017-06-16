@@ -20,7 +20,7 @@ contract("IronDoers", function(accounts) {
     return IronDoers.deployed().then(function(instance) {
       iron = instance;
       // Transactions (i.e. writing to the blockchain) are run without chained function.
-      iron.addDoer(accounts[1]);
+      iron.addDoer(accounts[1], {from: accounts[0]});
     }).then(function() {
       return iron.getDoerCount.call();
     }).then(function(count) {
@@ -34,7 +34,7 @@ contract("IronDoers", function(accounts) {
       // With Truffle you can pass an additional magic parameter that overrides the transaction sender. This way, we can
       // test transactions from accounts other than account[0] who created the contract.
       // This transaction
-      return iron.addDoer(accounts[3], {from: accounts[3]});
+      return iron.addDoer(accounts[2], {from: accounts[1]});
     }).then(function() {
       assert(false, "Anyone should not be able to add doers");
     }).catch(function(err) {
