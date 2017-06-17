@@ -20,7 +20,7 @@ contract IronPromise {
     uint public fulfillmentCount;
 
     modifier onlyDoers {
-        if (doers.isDoer(msg.sender) != true) throw;
+        if (!doers.isDoer(msg.sender)) throw;
         _;
     }
 

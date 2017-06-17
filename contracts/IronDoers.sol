@@ -16,7 +16,7 @@ contract IronDoers is IronDoersAbstract {
 	}
 
 	modifier onlyDoers {
-		if (doers[msg.sender]) throw;
+		if (!doers[msg.sender]) throw;
 		_;
 	}
 
