@@ -1,19 +1,14 @@
 pragma solidity ^0.4.0;
 
-contract IronDoers {
+import "./IronDoersAbstract.sol";
 
-	struct Doer {
-		address addr;
-		uint id;
-	}
+contract IronDoers is IronDoersAbstract {
 
 	address public trustee;
 
-	mapping(address => uint) public doerIds;
+	mapping(address => bool) public doers;
 
 	uint public doerCount;
-
-	Doer[] public doers;
 
 	modifier onlyTrustee {
 		if (msg.sender != trustee) throw;
@@ -21,30 +16,31 @@ contract IronDoers {
 	}
 
 	modifier onlyDoers {
-		if (doerIds[msg.sender] == 0) throw;
+		if (doers[msg.sender]) throw;
 		_;
 	}
 
 	function IronDoers() {
+		doerCount = 0;
 		trustee = msg.sender;
 		addDoer(trustee);
 	}
 
-	function getTrustee() returns (address) {
+	function getTrustee() constant returns (address) {
 		return trustee;
 	}
 
 	function addDoer(address addr) onlyTrustee {
-		uint id;
-		if (doerIds[addr] == 0) {
-			doerIds[addr] = doers.length;
-			id = doers.length++;
-			doers[id] = Doer({addr: addr, id: id});
-		}
-		doerCount = doers.length;
+		doers[addr] = true;
+		doerCount++;
 	}
 
-	function getDoerCount() returns (uint) {
+	function isDoer(address addr) constant returns (bool) {
+		if (doers[addr]) return true;
+		return false;
+	}
+
+	function getDoerCount() constant returns (uint) {
 		return doerCount;
 	}
 }
