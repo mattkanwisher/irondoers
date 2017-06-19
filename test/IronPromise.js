@@ -11,44 +11,44 @@ function assertThrow(err, test, msg) {
 
 contract("IronPromise", function(accounts) {
   it("should set deployer and doers", function() {
-    var iron;
+    var contract;
     return IronPromise.deployed().then(function(instance) {
-      iron = instance;
-      return iron.getDeployer.call();
+      contract = instance;
+      return contract.getDeployer.call();
     }).then(function(addr) {
       assert.equal(addr, accounts[0]);
     }).then(function() {
-      return iron.getDoers.call();
+      return contract.getDoers.call();
     }).then(function(addr) {
       assert.equal(addr, IronDoers.address);
     });
   });
 
   it("should initially not have any fulfillments", function() {
-    var iron;
+    var contract;
     return IronPromise.deployed().then(function(instance) {
-      iron = instance;
-      return iron.getFulfillmentCount.call();
+      contract = instance;
+      return contract.getFulfillmentCount.call();
     }).then(function(count) {
       assert.equal(count, 0);
     });
   });
 
   it("should only let doers fulfill a promise", function() {
-    var iron;
+    var contract;
     return IronPromise.deployed().then(function(instance) {
-      iron = instance;
-      return iron.fulfill("foo", {from: accounts[0]});
+      contract = instance;
+      return contract.fulfill("foo", {from: accounts[0]});
     }).then(function() {
-      return iron.getFulfillmentCount.call();
+      return contract.getFulfillmentCount.call();
     }).then(function(count) {
       assert.equal(count, 1);
     }).then(function() {
-      return iron.fulfill("example.com/foo", {from: accounts[2]});
+      return contract.fulfill("example.com/foo", {from: accounts[2]});
     }).catch(function(err) {
       assertThrow(err, "invalid opcode");
     }).then(function() {
-      return iron.getFulfillmentCount.call();
+      return contract.getFulfillmentCount.call();
     }).then(function(count) {
       assert.equal(count, 1);
     });

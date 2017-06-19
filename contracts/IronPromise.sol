@@ -30,18 +30,18 @@ contract IronPromise {
         doers = abs;
     }
 
+    function fulfill(string proof) onlyDoers {
+        bytes32 hash = sha3(msg.sender, proof);
+        fulfillments[hash] = Fulfillment({doer: msg.sender, proof: proof, timestamp: block.timestamp, hash: hash});
+        fulfillmentCount++;
+    }
+
     function getDeployer() constant returns (address) {
         return deployer;
     }
 
     function getDoers() constant returns (IronDoersAbstract) {
         return doers;
-    }
-
-    function fulfill(string proof) onlyDoers {
-        bytes32 hash = sha3(msg.sender, proof);
-        fulfillments[hash] = Fulfillment({doer: msg.sender, proof: proof, timestamp: block.timestamp, hash: hash});
-        fulfillmentCount++;
     }
 
     function getFulfillmentCount() constant returns (uint) {

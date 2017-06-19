@@ -5,7 +5,6 @@ import "./IronDoersAbstract.sol";
 contract IronToken {
 
     address public deployer;
-
     IronDoersAbstract public doers;
 
     modifier onlyDoers {
