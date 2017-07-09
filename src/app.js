@@ -19,6 +19,12 @@ window.App = {
     self.setFulfillmentCount();
   },
 
+  setAlert: function(message, type) {
+    type = type || "info";
+    var element = document.getElementById("alerts");
+    element.innerHTML = "<div class='alert alert-" + type + "'>" + message + "</div>";
+  },
+
   setAccount: function() {
     var accounts = web3.eth.accounts;
     if (accounts.length == 0) {
@@ -51,9 +57,11 @@ window.App = {
     var address = document.getElementById("doer-address").value;
 
     IronDoers.deployed().then(function(instance) {
+      self.setAlert("Adding doer...");
       return instance.addDoer(address, {from: account});
     }).then(function() {
       self.setDoerCount();
+      self.setAlert("Doer was added!", "success");
     }).catch(function(e) {
       console.log(e);
     });
@@ -64,9 +72,11 @@ window.App = {
     var proof = document.getElementById("fulfillment-proof").value;
 
     IronPromise.deployed().then(function(instance) {
+      self.setAlert("Submitting fulfillment proof...");
       return instance.fulfill(proof, {from: account});
     }).then(function() {
       self.setFulfillmentCount();
+      self.setAlert("Fulfillment proof was submitted!", "success");
     }).catch(function(e) {
       console.log(e);
     });
