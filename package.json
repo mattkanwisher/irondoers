@@ -2,15 +2,20 @@
   "name": "ironmakers",
   "version": "0.0.1",
   "description": "Decentralised application made to incentivise makers in a democratic autonomous organisation.",
+  "repository": "https://github.com/dickolsson/irondoers",
   "scripts": {
     "build": "webpack",
     "dev": "webpack-dev-server"
   },
   "author": "Dick Olsson",
   "license": "GPL-3.0",
+  "dependencies": {
+    "jquery": "~3",
+    "bootstrap": "~3"
+  },
   "devDependencies": {
-    "web3": "~0.18.0",
-    "json-loader": "~0.5.0",
+    "web3": "~0.18",
+    "json-loader": "~0.5",
     "truffle-contract": "~1",
     "webpack": "~2",
     "copy-webpack-plugin": "~4",

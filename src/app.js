@@ -1,12 +1,13 @@
 // Import libraries.
-import { default as Web3 } from "web3";
-import { default as contract } from "truffle-contract";
 
-// Import contract abstractions and create instances.
-import irondoers_json from "../build/contracts/IronDoers.json";
-import ironpromise_json from "../build/contracts/IronPromise.json";
-var IronDoers = contract(irondoers_json);
-var IronPromise = contract(ironpromise_json);
+var $ = require("jquery");
+var bootstrap = require("bootstrap");
+
+var Web3 = require("web3");
+var contract = require("truffle-contract");
+
+var IronDoers = contract(require("../build/contracts/IronDoers.json"));
+var IronPromise = contract(require("../build/contracts/IronPromise.json"));
 
 var account;
 
@@ -31,7 +32,7 @@ window.App = {
     IronDoers.deployed().then(function (instance) {
       return instance.getDoerCount.call();
     }).then(function (value) {
-      var element = document.getElementById("doerCount");
+      var element = document.getElementById("doer-count");
       element.innerHTML = value.valueOf();
     });
   },
@@ -40,14 +41,14 @@ window.App = {
     IronPromise.deployed().then(function (instance) {
       return instance.getFulfillmentCount.call();
     }).then(function (value) {
-      var element = document.getElementById("fulfillmentCount");
+      var element = document.getElementById("fulfillment-count");
       element.innerHTML = value.valueOf();
     });
   },
 
   addDoer: function() {
     var self = this;
-    var address = document.getElementById("doerAddress").value;
+    var address = document.getElementById("doer-address").value;
 
     IronDoers.deployed().then(function(instance) {
       return instance.addDoer(address, {from: account});
@@ -60,7 +61,7 @@ window.App = {
 
   fulfill: function() {
     var self = this;
-    var proof = document.getElementById("proof").value;
+    var proof = document.getElementById("fulfillment-proof").value;
 
     IronPromise.deployed().then(function(instance) {
       return instance.fulfill(proof, {from: account});
