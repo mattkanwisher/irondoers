@@ -1,13 +1,8 @@
-// Import libraries.
-
 require("bootstrap");
-
 var Web3 = require("web3");
 var contract = require("truffle-contract");
-
 var IronDoers = contract(require("../build/contracts/IronDoers.json"));
 var IronPromise = contract(require("../build/contracts/IronPromise.json"));
-
 var account;
 
 window.App = {
@@ -23,15 +18,20 @@ window.App = {
     element.innerHTML = "<div class='alert alert-" + type + "'>" + message + "</div>";
   },
 
-  setError: function(message) {
+  setError: function(message, err) {
+    err = err || message;
     this.setAlert("<strong>Error!</strong> " + message, "danger");
-    throw message;
+    throw err;
   },
 
   setAccount: function() {
-    var accounts = web3.eth.accounts;
+    try {
+      var accounts = web3.eth.accounts;
+    } catch(err) {
+      this.setError("Use a browser that can browse the decentralized web!", err);
+    }
     if (accounts.length == 0) {
-      this.setError("Please connect an account!");
+      this.setError("Connect an account!");
     }
     account = accounts[0];
   },
@@ -48,7 +48,7 @@ window.App = {
   setFulfillmentCount: function() {
     IronPromise.deployed().then(function (instance) {
       return instance.getFulfillmentCount.call();
-    }).then(function (value) {
+    }).then(function(value) {
       var element = document.getElementById("fulfillment-count");
       element.innerHTML = value.valueOf();
     });
@@ -57,30 +57,24 @@ window.App = {
   addDoer: function() {
     var self = this;
     var address = document.getElementById("doer-address").value;
-
     IronDoers.deployed().then(function(instance) {
       self.setAlert("Adding doer...");
       return instance.addDoer(address, {from: account});
     }).then(function() {
       self.setDoerCount();
       self.setAlert("Doer was added!", "success");
-    }).catch(function(e) {
-      console.log(e);
     });
   },
 
   fulfill: function() {
     var self = this;
     var proof = document.getElementById("fulfillment-proof").value;
-
     IronPromise.deployed().then(function(instance) {
       self.setAlert("Submitting fulfillment proof...");
       return instance.fulfill(proof, {from: account});
     }).then(function() {
       self.setFulfillmentCount();
       self.setAlert("Fulfillment proof was submitted!", "success");
-    }).catch(function(e) {
-      console.log(e);
     });
   }
 };
