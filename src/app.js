@@ -25,11 +25,15 @@ window.App = {
     element.innerHTML = "<div class='alert alert-" + type + "'>" + message + "</div>";
   },
 
+  setError: function(message) {
+    this.setAlert("<strong>Error!</strong> " + message, "danger");
+    throw message;
+  },
+
   setAccount: function() {
     var accounts = web3.eth.accounts;
     if (accounts.length == 0) {
-      alert("Please connect an account.");
-      return;
+      this.setError("Please connect an account!");
     }
     account = accounts[0];
   },
