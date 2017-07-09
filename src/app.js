@@ -1,8 +1,8 @@
-require("bootstrap");
 var Web3 = require("web3");
 var contract = require("truffle-contract");
 var IronDoers = contract(require("../build/contracts/IronDoers.json"));
 var IronPromise = contract(require("../build/contracts/IronPromise.json"));
+require("bootstrap");
 var account;
 
 window.App = {

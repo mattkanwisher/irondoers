@@ -9,14 +9,12 @@
   },
   "author": "Dick Olsson",
   "license": "GPL-3.0",
-  "dependencies": {
-    "bootstrap": "~3",
-    "web3": "~0.18"
-  },
   "devDependencies": {
+    "web3": "~0.18",
     "json-loader": "~0.5",
     "truffle-contract": "~1",
     "webpack": "~2",
-    "webpack-dev-server": "~2"
+    "webpack-dev-server": "~2",
+    "bootstrap": "~3"
   }
 }
