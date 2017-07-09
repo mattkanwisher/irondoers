@@ -10,7 +10,6 @@
   "author": "Dick Olsson",
   "license": "GPL-3.0",
   "dependencies": {
-    "jquery": "~3",
     "bootstrap": "~3",
     "web3": "~0.18"
   },
