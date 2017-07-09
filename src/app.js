@@ -12,10 +12,9 @@ var account;
 
 window.App = {
   start: function() {
-    var self = this;
-    self.setAccount();
-    self.setDoerCount();
-    self.setFulfillmentCount();
+    this.setAccount();
+    this.setDoerCount();
+    this.setFulfillmentCount();
   },
 
   setAlert: function(message, type) {
