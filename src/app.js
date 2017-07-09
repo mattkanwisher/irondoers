@@ -1,7 +1,6 @@
 // Import libraries.
 
-var $ = require("jquery");
-var bootstrap = require("bootstrap");
+require("bootstrap");
 
 var Web3 = require("web3");
 var contract = require("truffle-contract");
