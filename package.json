@@ -1,7 +1,7 @@
 {
   "name": "ironmakers",
   "version": "0.0.1",
-  "description": "Decentralised application made to incentivise makers in a democratic autonomous organisation.",
+  "description": "Decentralised application made to incentivise doers in a democratic autonomous organisation.",
   "repository": "https://github.com/dickolsson/irondoers",
   "scripts": {
     "build": "webpack",
