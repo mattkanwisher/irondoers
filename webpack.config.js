@@ -3,7 +3,7 @@ var path = require("path");
 const www = path.resolve(__dirname, "www");
 
 module.exports = {
-  entry: "./src/app.js",
+  entry: "./src/dapp.js",
   output: {
     filename: "bundle.js",
     path: www
