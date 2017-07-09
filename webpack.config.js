@@ -5,7 +5,7 @@ const www = path.resolve(__dirname, "www");
 module.exports = {
   entry: "./src/app.js",
   output: {
-    filename: "app.js",
+    filename: "bundle.js",
     path: www
   },
   module: {
