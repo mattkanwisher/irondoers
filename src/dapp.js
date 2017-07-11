@@ -5,7 +5,7 @@ var IronPromise = contract(require("../build/contracts/IronPromise.json"));
 require("bootstrap");
 var account;
 
-window.App = {
+window.Dapp = {
   start: function() {
     this.setDoerCount();
     this.setFulfillmentCount();
@@ -75,13 +75,13 @@ window.addEventListener("load", function() {
   try {
     var accounts = web3.eth.accounts;
   } catch(err) {
-    App.throwError("Use a browser that can browse the decentralized web!", err);
+    Dapp.throwError("Use a browser that can browse the decentralized web!", err);
   }
   if (accounts.length == 0) {
-    App.throwError("Connect an account!");
+    Dapp.throwError("Connect an account!");
   }
   account = accounts[0];
   IronDoers.setProvider(web3.currentProvider);
   IronPromise.setProvider(web3.currentProvider);
-  App.start();
+  Dapp.start();
 });
