@@ -7,7 +7,6 @@ var account;
 
 window.App = {
   start: function() {
-    this.setAccount();
     this.setDoerCount();
     this.setFulfillmentCount();
   },
@@ -18,22 +17,10 @@ window.App = {
     element.innerHTML = "<div class='alert alert-" + type + "'>" + message + "</div>";
   },
 
-  setError: function(message, err) {
+  throwError: function(message, err) {
     err = err || message;
     this.setAlert("<strong>Error!</strong> " + message, "danger");
     throw err;
-  },
-
-  setAccount: function() {
-    try {
-      var accounts = web3.eth.accounts;
-    } catch(err) {
-      this.setError("Use a browser that can browse the decentralized web!", err);
-    }
-    if (accounts.length == 0) {
-      this.setError("Connect an account!");
-    }
-    account = accounts[0];
   },
 
   setDoerCount: function() {
@@ -85,6 +72,15 @@ window.addEventListener("load", function() {
   } else {
     window.web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
   }
+  try {
+    var accounts = web3.eth.accounts;
+  } catch(err) {
+    App.throwError("Use a browser that can browse the decentralized web!", err);
+  }
+  if (accounts.length == 0) {
+    App.throwError("Connect an account!");
+  }
+  account = accounts[0];
   IronDoers.setProvider(web3.currentProvider);
   IronPromise.setProvider(web3.currentProvider);
   App.start();
