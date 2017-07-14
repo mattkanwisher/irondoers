@@ -29,6 +29,8 @@ window.Dapp = {
     }).then(function (value) {
       var element = document.getElementById("doer-count");
       element.innerHTML = value.valueOf();
+    }).catch(function(err) {
+      console.log(err);
     });
   },
 
@@ -38,6 +40,8 @@ window.Dapp = {
     }).then(function(value) {
       var element = document.getElementById("fulfillment-count");
       element.innerHTML = value.valueOf();
+    }).catch(function(err) {
+      console.log(err);
     });
   },
 
@@ -50,6 +54,8 @@ window.Dapp = {
     }).then(function() {
       self.setDoerCount();
       self.setAlert("Doer was added!", "success");
+    }).catch(function(err) {
+      console.log(err);
     });
   },
 
@@ -62,6 +68,8 @@ window.Dapp = {
     }).then(function() {
       self.setFulfillmentCount();
       self.setAlert("Fulfillment proof was submitted!", "success");
+    }).catch(function(err) {
+      console.log(err);
     });
   }
 };
