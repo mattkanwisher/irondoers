@@ -1,7 +1,7 @@
 const ENS = artifacts.require("./ENS.sol");
 const FIFSRegistrar = artifacts.require('./FIFSRegistrar.sol');
 const PublicResolver = artifacts.require('./PublicResolver.sol');
-const namehash = require('eth-ens-namehash');
+const namehash = require('../node_modules/eth-ens-namehash');
 
 const Web3 = require('web3');
 const web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
